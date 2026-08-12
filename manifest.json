@@ -1,0 +1,9 @@
+{
+  "id": "gherkin-highlighter",
+  "name": "Gherkin Highlighter",
+  "version": "1.0.0",
+  "minAppVersion": "1.4.0",
+  "description": "Syntax highlighting for Gherkin (Cucumber) in code blocks and .feature files, with English and Russian dialects.",
+  "author": "Dmitriy Sergeev",
+  "isDesktopOnly": false
+}
