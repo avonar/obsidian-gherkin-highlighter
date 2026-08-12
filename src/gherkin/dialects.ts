@@ -22,6 +22,10 @@ export interface DialectKeywords {
 	but: string[];
 }
 
+/**
+ * Category arrays stay in canonical order — the primary keyword first, which is
+ * what templates and the settings tab show. Only the match tables are sorted.
+ */
 export interface Dialect extends DialectKeywords {
 	/** Language code this dialect was resolved from. */
 	language: string;
@@ -60,11 +64,11 @@ const RAW_DIALECTS: Record<string, DialectKeywords> = {
 		scenario: ["Сценарий:", "Пример:"],
 		scenarioOutline: ["Структура сценария:", "Шаблон сценария:"],
 		examples: ["Примеры:"],
-		given: ["Допустим", "Дано", "Пусть"],
+		given: ["Дано", "Допустим", "Пусть"],
 		when: ["Когда", "Если"],
 		then: ["Тогда", "Затем", "То"],
-		and: ["К тому же", "Также", "И", "А"],
-		but: ["Иначе", "Но", "А"],
+		and: ["И", "К тому же", "Также", "А"],
+		but: ["Но", "Иначе", "А"],
 	},
 };
 
@@ -103,17 +107,6 @@ function buildDialect(code: string, raw: DialectKeywords): Dialect {
 	return {
 		...raw,
 		language: code,
-		feature: byLengthDesc(raw.feature),
-		background: byLengthDesc(raw.background),
-		rule: byLengthDesc(raw.rule),
-		scenario: byLengthDesc(raw.scenario),
-		scenarioOutline: byLengthDesc(raw.scenarioOutline),
-		examples: byLengthDesc(raw.examples),
-		given: byLengthDesc(raw.given),
-		when: byLengthDesc(raw.when),
-		then: byLengthDesc(raw.then),
-		and: byLengthDesc(raw.and),
-		but: byLengthDesc(raw.but),
 		blockKeywords: byLengthDesc([
 			...raw.feature,
 			...raw.background,

@@ -1,0 +1,141 @@
+/*
+ * Gherkin Highlighter
+ *
+ * Every token class is used twice: on spans rendered in reading mode and on
+ * CodeMirror decorations in the editor. Colours fall back to the active theme's
+ * palette, so they follow light and dark themes; the settings tab overrides
+ * them by setting --gk-* on <body>.
+ */
+
+.gk-keyword {
+	color: var(--gk-keyword, var(--color-purple));
+	font-weight: var(--font-semibold, 600);
+}
+
+.gk-name {
+	color: var(--text-normal);
+	font-weight: var(--font-semibold, 600);
+}
+
+.gk-step {
+	color: var(--gk-step, var(--color-blue));
+	font-weight: var(--font-semibold, 600);
+}
+
+.gk-step-text {
+	color: var(--text-normal);
+}
+
+.gk-tag {
+	color: var(--gk-tag, var(--color-orange));
+	font-style: italic;
+}
+
+.gk-comment {
+	color: var(--gk-comment, var(--text-faint));
+	font-style: italic;
+}
+
+.gk-string {
+	color: var(--gk-string, var(--color-green));
+}
+
+.gk-number {
+	color: var(--gk-number, var(--color-cyan));
+}
+
+.gk-placeholder {
+	color: var(--gk-placeholder, var(--color-pink));
+	font-style: italic;
+}
+
+.gk-docstring {
+	color: var(--gk-string, var(--color-green));
+}
+
+.gk-docstring-delimiter {
+	color: var(--gk-string, var(--color-green));
+	opacity: 0.65;
+}
+
+.gk-table {
+	color: var(--text-normal);
+}
+
+.gk-table-header {
+	color: var(--gk-tag, var(--color-orange));
+	font-weight: var(--font-semibold, 600);
+}
+
+.gk-table-separator {
+	color: var(--text-faint);
+}
+
+.gk-description {
+	color: var(--text-muted);
+	font-style: italic;
+}
+
+/* Reading mode and the Live Preview widget. */
+
+pre.gherkin-highlight {
+	background-color: var(--code-background);
+	border-radius: var(--radius-s);
+	padding: var(--size-4-3) var(--size-4-4);
+	overflow-x: auto;
+	tab-size: 4;
+}
+
+pre.gherkin-highlight code.gherkin-highlight-code {
+	background: none;
+	padding: 0;
+	color: var(--text-normal);
+	font-family: var(--font-monospace);
+	font-size: var(--code-size);
+	white-space: pre;
+}
+
+/* Standalone .feature files. */
+
+.gherkin-feature-editor {
+	height: 100%;
+	overflow: auto;
+}
+
+.gherkin-feature-editor .cm-editor {
+	height: 100%;
+	background: var(--background-primary);
+	color: var(--text-normal);
+	font-family: var(--font-monospace);
+	font-size: var(--code-size);
+}
+
+.gherkin-feature-editor .cm-editor.cm-focused {
+	outline: none;
+}
+
+.gherkin-feature-editor .cm-scroller {
+	font-family: inherit;
+	line-height: var(--line-height-normal);
+	padding: var(--size-4-3) 0;
+}
+
+.gherkin-feature-editor .cm-content {
+	caret-color: var(--caret-color, var(--text-normal));
+}
+
+.gherkin-feature-editor .cm-gutters {
+	background: var(--background-primary);
+	border-right: 1px solid var(--background-modifier-border);
+	color: var(--text-faint);
+}
+
+.gherkin-feature-editor .cm-activeLine {
+	background-color: var(--text-selection);
+	background-color: color-mix(in srgb, var(--text-selection) 35%, transparent);
+}
+
+.gherkin-feature-editor .cm-selectionBackground,
+.gherkin-feature-editor .cm-content ::selection {
+	background-color: var(--text-selection);
+}

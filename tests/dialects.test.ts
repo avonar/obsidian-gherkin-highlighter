@@ -48,16 +48,23 @@ describe("resolveDialect", () => {
 		expect(resolveDialect("klingon").language).toBe(DEFAULT_LANGUAGE);
 	});
 
-	it("orders keywords longest first so that prefixes do not win", () => {
-		const dialect = resolveDialect("en");
-		const outline = dialect.scenarioOutline.indexOf("Scenario Outline:");
-		const template = dialect.scenarioOutline.indexOf("Scenario Template:");
-		expect(outline).toBeGreaterThanOrEqual(0);
-		expect(template).toBeGreaterThanOrEqual(0);
-		for (let i = 1; i < dialect.given.length; i++) {
-			expect(dialect.given[i - 1].length).toBeGreaterThanOrEqual(
-				dialect.given[i].length,
-			);
+	it("orders match tables longest first so that prefixes do not win", () => {
+		for (const code of ["en", "ru"]) {
+			const dialect = resolveDialect(code);
+			for (const table of [dialect.blockKeywords, dialect.stepKeywords]) {
+				for (let i = 1; i < table.length; i++) {
+					expect(table[i - 1].length).toBeGreaterThanOrEqual(
+						table[i].length,
+					);
+				}
+			}
 		}
+	});
+
+	it("keeps the primary keyword of each category first", () => {
+		expect(resolveDialect("en").feature[0]).toBe("Feature:");
+		expect(resolveDialect("en").given[0]).toBe("Given");
+		expect(resolveDialect("ru").feature[0]).toBe("Функция:");
+		expect(resolveDialect("ru").given[0]).toBe("Дано");
 	});
 });
