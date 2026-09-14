@@ -5,6 +5,7 @@ import type GherkinHighlighterPlugin from "./main";
 /** Token colours the settings tab lets the user override. */
 export const COLOR_KEYS = [
 	"keyword",
+	"name",
 	"step",
 	"tag",
 	"comment",
@@ -16,21 +17,26 @@ export type ColorKey = (typeof COLOR_KEYS)[number];
 
 export const COLOR_LABELS: Record<ColorKey, string> = {
 	keyword: "Feature, Scenario, Examples",
+	name: "Feature and scenario titles, table headers",
 	step: "Given, When, Then",
 	tag: "Tags",
 	comment: "Comments",
-	string: 'Strings and doc strings',
+	string: "Strings, doc strings, table cells",
 	placeholder: "Placeholders <like this>",
 };
 
-/** Fallbacks used when the user turns theme colours off without picking one. */
+/**
+ * Default palette, modelled on Notion's light-mode code blocks: teal keywords,
+ * orange titles and table headers, blue steps, green strings.
+ */
 export const DEFAULT_COLORS: Record<ColorKey, string> = {
-	keyword: "#a882ff",
-	step: "#4c9aff",
-	tag: "#e5a33d",
-	comment: "#7f8590",
-	string: "#5bbd7a",
-	placeholder: "#e069b0",
+	keyword: "#0b6e99",
+	name: "#d9730d",
+	step: "#2e7cd6",
+	tag: "#6940a5",
+	comment: "#787774",
+	string: "#448c27",
+	placeholder: "#d9730d",
 };
 
 export interface GherkinSettings {
@@ -38,7 +44,7 @@ export interface GherkinSettings {
 	highlightInEditor: boolean;
 	/** Dialect used until a `# language:` directive says otherwise. */
 	defaultLanguage: string;
-	/** Take colours from the active Obsidian theme. */
+	/** Take colours from the active Obsidian theme instead of the palette. */
 	useThemeColors: boolean;
 	colors: Record<ColorKey, string>;
 	/** Open `.feature` files in the plugin's own editor. */
@@ -48,17 +54,20 @@ export interface GherkinSettings {
 export const DEFAULT_SETTINGS: GherkinSettings = {
 	highlightInEditor: true,
 	defaultLanguage: DEFAULT_LANGUAGE,
-	useThemeColors: true,
+	useThemeColors: false,
 	colors: { ...DEFAULT_COLORS },
 	handleFeatureFiles: true,
 };
 
+const THEME_CLASS = "gherkin-theme-colors";
+
 /**
- * Pushes colour overrides onto the document as CSS variables. The stylesheet
- * already reads these, so nothing needs re-rendering.
+ * Pushes the palette onto the document as CSS variables, or flags the body so
+ * the stylesheet switches to theme colours. Nothing needs re-rendering.
  */
 export function applyColors(settings: GherkinSettings): void {
 	const style = document.body.style;
+	document.body.classList.toggle(THEME_CLASS, settings.useThemeColors);
 	for (const key of COLOR_KEYS) {
 		const variable = `--gk-${key}`;
 		if (settings.useThemeColors) {
@@ -69,8 +78,9 @@ export function applyColors(settings: GherkinSettings): void {
 	}
 }
 
-/** Removes every variable this plugin set, for a clean unload. */
+/** Removes everything this plugin put on <body>, for a clean unload. */
 export function clearColors(): void {
+	document.body.classList.remove(THEME_CLASS);
 	for (const key of COLOR_KEYS) {
 		document.body.style.removeProperty(`--gk-${key}`);
 	}
@@ -138,7 +148,7 @@ export class GherkinSettingTab extends PluginSettingTab {
 		new Setting(containerEl)
 			.setName("Use theme colours")
 			.setDesc(
-				"Follow the active theme's palette. Turn off to pick colours yourself.",
+				"Follow the active theme's palette instead of the built-in Notion-like one. Turn off to pick colours yourself.",
 			)
 			.addToggle((toggle) =>
 				toggle

@@ -12,9 +12,9 @@ source mode alike.
   numbers, undo and search, and save like any other file.
 - **English and Russian dialects.** A `# language: ru` directive switches the
   keyword set for that block; the fallback dialect is a setting.
-- **Theme-aware colours.** Colours come from the active theme's palette by
-  default, so they work in light and dark. Six of them can be overridden in the
-  settings tab.
+- **Notion-like colours.** The default palette mirrors Notion's code blocks:
+  teal keywords, orange titles, blue steps, green strings. Every colour can be
+  changed in the settings tab, or you can switch to the active theme's palette.
 - **Full Gherkin syntax:** feature and scenario keywords, steps, tags,
   comments, doc strings, data tables, placeholders, strings and numbers.
 
@@ -74,7 +74,7 @@ Enable **Gherkin Highlighter** under Settings → Community plugins.
 | Highlight while editing | Colours Gherkin in Live Preview and source mode. Reading mode is always highlighted. |
 | Default language | Keyword set used when a block has no `# language:` directive. |
 | Open .feature files | Registers the `.feature` extension with the plugin's editor. |
-| Use theme colours | Follow the theme palette, or pick the six token colours yourself. |
+| Use theme colours | Off by default (Notion-like palette). On: follow the active theme's palette instead. |
 
 Themes and CSS snippets can restyle any token directly — every token carries a
 `gk-*` class (`gk-keyword`, `gk-step`, `gk-tag`, `gk-comment`, `gk-string`,

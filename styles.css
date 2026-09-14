@@ -7,19 +7,23 @@
  * them by setting --gk-* on <body>.
  */
 
+/*
+ * Default palette follows Notion's light-mode code blocks. The --gk-* variables
+ * are set on <body> by the settings tab; when the user opts into theme colours
+ * they are cleared and the theme fallbacks below take over.
+ */
+
 .gk-keyword {
-	color: var(--gk-keyword, var(--color-purple));
-	font-weight: var(--font-semibold, 600);
+	color: var(--gk-keyword, #0b6e99);
 }
 
 .gk-name {
-	color: var(--text-normal);
+	color: var(--gk-name, #d9730d);
 	font-weight: var(--font-semibold, 600);
 }
 
 .gk-step {
-	color: var(--gk-step, var(--color-blue));
-	font-weight: var(--font-semibold, 600);
+	color: var(--gk-step, #2e7cd6);
 }
 
 .gk-step-text {
@@ -27,44 +31,41 @@
 }
 
 .gk-tag {
-	color: var(--gk-tag, var(--color-orange));
-	font-style: italic;
+	color: var(--gk-tag, #6940a5);
 }
 
 .gk-comment {
-	color: var(--gk-comment, var(--text-faint));
+	color: var(--gk-comment, #787774);
 	font-style: italic;
 }
 
 .gk-string {
-	color: var(--gk-string, var(--color-green));
+	color: var(--gk-string, #448c27);
 }
 
 .gk-number {
-	color: var(--gk-number, var(--color-cyan));
+	color: var(--text-normal);
 }
 
 .gk-placeholder {
-	color: var(--gk-placeholder, var(--color-pink));
-	font-style: italic;
+	color: var(--gk-placeholder, #d9730d);
 }
 
 .gk-docstring {
-	color: var(--gk-string, var(--color-green));
+	color: var(--gk-string, #448c27);
 }
 
 .gk-docstring-delimiter {
-	color: var(--gk-string, var(--color-green));
+	color: var(--gk-string, #448c27);
 	opacity: 0.65;
 }
 
 .gk-table {
-	color: var(--text-normal);
+	color: var(--gk-string, #448c27);
 }
 
 .gk-table-header {
-	color: var(--gk-tag, var(--color-orange));
-	font-weight: var(--font-semibold, 600);
+	color: var(--gk-name, #d9730d);
 }
 
 .gk-table-separator {
@@ -72,6 +73,59 @@
 }
 
 .gk-description {
+	color: var(--text-normal);
+}
+
+/* Theme palette, used when "Use theme colours" is on. */
+
+body.gherkin-theme-colors .gk-keyword {
+	color: var(--color-purple);
+	font-weight: var(--font-semibold, 600);
+}
+
+body.gherkin-theme-colors .gk-name {
+	color: var(--text-normal);
+}
+
+body.gherkin-theme-colors .gk-step {
+	color: var(--color-blue);
+	font-weight: var(--font-semibold, 600);
+}
+
+body.gherkin-theme-colors .gk-tag {
+	color: var(--color-orange);
+	font-style: italic;
+}
+
+body.gherkin-theme-colors .gk-comment {
+	color: var(--text-faint);
+}
+
+body.gherkin-theme-colors .gk-string,
+body.gherkin-theme-colors .gk-docstring,
+body.gherkin-theme-colors .gk-docstring-delimiter {
+	color: var(--color-green);
+}
+
+body.gherkin-theme-colors .gk-number {
+	color: var(--color-cyan);
+}
+
+body.gherkin-theme-colors .gk-placeholder {
+	color: var(--color-pink);
+	font-style: italic;
+}
+
+body.gherkin-theme-colors .gk-table {
+	color: var(--text-normal);
+}
+
+body.gherkin-theme-colors .gk-table-header {
+	color: var(--color-orange);
+	font-weight: var(--font-semibold, 600);
+}
+
+body.gherkin-theme-colors .gk-description {
 	color: var(--text-muted);
 	font-style: italic;
 }
