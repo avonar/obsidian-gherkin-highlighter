@@ -140,12 +140,12 @@ pre.gherkin-highlight {
 	tab-size: 4;
 }
 
+/* Font family, size and line height are inherited from Obsidian's own
+   `.markdown-rendered pre code` rules, so the block looks like any other. */
 pre.gherkin-highlight code.gherkin-highlight-code {
 	background: none;
 	padding: 0;
 	color: var(--text-normal);
-	font-family: var(--font-monospace);
-	font-size: var(--code-size);
 	white-space: pre;
 }
 
@@ -156,6 +156,8 @@ pre.gherkin-highlight code.gherkin-highlight-code {
 	overflow: auto;
 }
 
+/* CodeMirror's base theme forces `font-family: monospace`; point it back at
+   Obsidian's monospace settings instead. */
 .gherkin-feature-editor .cm-editor {
 	height: 100%;
 	background: var(--background-primary);
