@@ -11,6 +11,7 @@ export const COLOR_KEYS = [
 	"comment",
 	"string",
 	"placeholder",
+	"background",
 ] as const;
 
 export type ColorKey = (typeof COLOR_KEYS)[number];
@@ -23,11 +24,12 @@ export const COLOR_LABELS: Record<ColorKey, string> = {
 	comment: "Comments",
 	string: "Strings, doc strings, table cells",
 	placeholder: "Placeholders <like this>",
+	background: "Block background",
 };
 
 /**
  * Default palette, modelled on Notion's light-mode code blocks: teal keywords,
- * orange titles and table headers, blue steps, green strings.
+ * orange titles and table headers, blue steps, green strings, warm grey block.
  */
 export const DEFAULT_COLORS: Record<ColorKey, string> = {
 	keyword: "#0b6e99",
@@ -37,6 +39,7 @@ export const DEFAULT_COLORS: Record<ColorKey, string> = {
 	comment: "#787774",
 	string: "#448c27",
 	placeholder: "#d9730d",
+	background: "#f7f6f3",
 };
 
 export interface GherkinSettings {

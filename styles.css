@@ -130,10 +130,19 @@ body.gherkin-theme-colors .gk-description {
 	font-style: italic;
 }
 
+body.gherkin-theme-colors pre.gherkin-highlight {
+	background-color: var(--code-background);
+}
+
+body.gherkin-theme-colors .gherkin-feature-editor .cm-editor,
+body.gherkin-theme-colors .gherkin-feature-editor .cm-gutters {
+	background: var(--gk-background, #f7f6f3);
+}
+
 /* Reading mode and the Live Preview widget. */
 
 pre.gherkin-highlight {
-	background-color: var(--code-background);
+	background-color: var(--gk-background, #f7f6f3);
 	border-radius: var(--radius-s);
 	padding: var(--size-4-3) var(--size-4-4);
 	overflow-x: auto;
@@ -160,7 +169,7 @@ pre.gherkin-highlight code.gherkin-highlight-code {
    Obsidian's monospace settings instead. */
 .gherkin-feature-editor .cm-editor {
 	height: 100%;
-	background: var(--background-primary);
+	background: var(--gk-background, #f7f6f3);
 	color: var(--text-normal);
 	font-family: var(--font-monospace);
 	font-size: var(--code-size);
@@ -181,7 +190,7 @@ pre.gherkin-highlight code.gherkin-highlight-code {
 }
 
 .gherkin-feature-editor .cm-gutters {
-	background: var(--background-primary);
+	background: var(--gk-background, #f7f6f3);
 	border-right: 1px solid var(--background-modifier-border);
 	color: var(--text-faint);
 }

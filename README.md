@@ -13,7 +13,8 @@ source mode alike.
 - **English and Russian dialects.** A `# language: ru` directive switches the
   keyword set for that block; the fallback dialect is a setting.
 - **Notion-like colours.** The default palette mirrors Notion's code blocks:
-  teal keywords, orange titles, blue steps, green strings. Every colour can be
+  teal keywords, orange titles, blue steps, green strings, warm grey
+  background. Every colour can be
   changed in the settings tab, or you can switch to the active theme's palette.
 - **Full Gherkin syntax:** feature and scenario keywords, steps, tags,
   comments, doc strings, data tables, placeholders, strings and numbers.
