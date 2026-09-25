@@ -1,4 +1,4 @@
-import { TextFileView, type WorkspaceLeaf } from "obsidian";
+import { Scope, TextFileView, type WorkspaceLeaf } from "obsidian";
 import { EditorState } from "@codemirror/state";
 import {
 	EditorView,
@@ -14,7 +14,10 @@ import {
 	indentWithTab,
 } from "@codemirror/commands";
 import {
+	findNext,
+	findPrevious,
 	highlightSelectionMatches,
+	openSearchPanel,
 	search,
 	searchKeymap,
 } from "@codemirror/search";
@@ -37,6 +40,32 @@ export class FeatureView extends TextFileView {
 	constructor(leaf: WorkspaceLeaf, plugin: GherkinHighlighterPlugin) {
 		super(leaf);
 		this.plugin = plugin;
+		this.scope = this.buildScope();
+	}
+
+	/**
+	 * Obsidian pushes a view's scope while that view is active, so these fire
+	 * even when focus is not inside the CodeMirror content — which is where
+	 * Obsidian's own "Search current file" would otherwise swallow Cmd+F.
+	 */
+	private buildScope(): Scope {
+		const scope = new Scope(this.app.scope);
+		const bind = (
+			modifiers: Parameters<Scope["register"]>[0],
+			key: string,
+			command: (view: EditorView) => boolean,
+		) => {
+			scope.register(modifiers, key, () => {
+				if (!this.editor) return true;
+				command(this.editor);
+				return false;
+			});
+		};
+		bind(["Mod"], "f", openSearchPanel);
+		bind(["Mod", "Alt"], "f", openSearchPanel);
+		bind(["Mod"], "g", findNext);
+		bind(["Mod", "Shift"], "g", findPrevious);
+		return scope;
 	}
 
 	getViewType(): string {
@@ -119,6 +148,7 @@ export class FeatureView extends TextFileView {
 				],
 			}),
 		});
+		this.editor.focus();
 	}
 
 	async onClose(): Promise<void> {
