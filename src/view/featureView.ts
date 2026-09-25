@@ -13,6 +13,11 @@ import {
 	historyKeymap,
 	indentWithTab,
 } from "@codemirror/commands";
+import {
+	highlightSelectionMatches,
+	search,
+	searchKeymap,
+} from "@codemirror/search";
 import { gherkinHighlighter } from "../editor/highlighter";
 import type GherkinHighlighterPlugin from "../main";
 
@@ -89,10 +94,15 @@ export class FeatureView extends TextFileView {
 					history(),
 					drawSelection(),
 					highlightActiveLine(),
+					highlightSelectionMatches(),
+					// Obsidian's own Cmd+F only knows its markdown editor, so
+					// the view brings CodeMirror's search panel along.
+					search({ top: true }),
 					EditorView.lineWrapping,
 					keymap.of([
 						...defaultKeymap,
 						...historyKeymap,
+						...searchKeymap,
 						indentWithTab,
 					]),
 					gherkinHighlighter({

@@ -204,3 +204,86 @@ pre.gherkin-highlight code.gherkin-highlight-code {
 .gherkin-feature-editor .cm-content ::selection {
 	background-color: var(--text-selection);
 }
+
+/* CodeMirror search panel, dressed to match Obsidian's search bar. */
+
+.gherkin-feature-editor .cm-panels {
+	background: var(--background-secondary);
+	color: var(--text-normal);
+	border-bottom: 1px solid var(--background-modifier-border);
+	font-family: var(--font-interface);
+	font-size: var(--font-ui-small);
+}
+
+.gherkin-feature-editor .cm-panel.cm-search {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--size-2-2) var(--size-4-2);
+	padding: var(--size-4-2) var(--size-4-3);
+}
+
+.gherkin-feature-editor .cm-panel.cm-search input,
+.gherkin-feature-editor .cm-panel.cm-search button {
+	font-family: inherit;
+	font-size: inherit;
+	margin: 0;
+}
+
+.gherkin-feature-editor .cm-panel.cm-search .cm-textfield {
+	background: var(--background-modifier-form-field);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-s);
+	color: var(--text-normal);
+	padding: var(--size-2-1) var(--size-4-2);
+}
+
+.gherkin-feature-editor .cm-panel.cm-search .cm-textfield:focus {
+	border-color: var(--interactive-accent);
+	box-shadow: 0 0 0 2px var(--background-modifier-border-focus);
+	outline: none;
+}
+
+.gherkin-feature-editor .cm-panel.cm-search .cm-button {
+	background: var(--interactive-normal);
+	background-image: none;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-s);
+	color: var(--text-normal);
+	padding: var(--size-2-1) var(--size-4-2);
+	cursor: var(--cursor);
+}
+
+.gherkin-feature-editor .cm-panel.cm-search .cm-button:hover {
+	background: var(--interactive-hover);
+}
+
+.gherkin-feature-editor .cm-panel.cm-search label {
+	color: var(--text-muted);
+	display: inline-flex;
+	align-items: center;
+	gap: var(--size-2-1);
+}
+
+.gherkin-feature-editor .cm-panel.cm-search button[name="close"] {
+	color: var(--text-muted);
+	background: none;
+	border: none;
+	font-size: var(--font-ui-medium);
+	top: var(--size-2-2);
+	right: var(--size-4-2);
+}
+
+.gherkin-feature-editor .cm-searchMatch {
+	background: var(--text-highlight-bg);
+	border-radius: 2px;
+}
+
+.gherkin-feature-editor .cm-searchMatch-selected {
+	background: var(--text-accent);
+	color: var(--text-on-accent);
+}
+
+.gherkin-feature-editor .cm-selectionMatch {
+	background: var(--text-selection);
+}
